@@ -3,6 +3,7 @@ package com.qq.controller;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,10 @@ import com.qq.service.MemberSrevice;
 @Slf4j
 @RestController
 public class MenmberController {
+	@Value("${name}")
+	private String name;
+	@Value("${http_url}")
+	private String http_url;
 	
 	@Autowired
 	private MemberSrevice memberSrevice;
@@ -33,5 +38,16 @@ public class MenmberController {
 		String result = memberSrevice.addMemberAndEmail();
 		log.info("4");
 		return result;
+	}
+	
+	@RequestMapping("/getName")
+	public String getName(){
+		return name;
+	}
+	
+	
+	@RequestMapping("/getHttp_url")
+	public String getHttp_url(){
+		return http_url;
 	}
 }
